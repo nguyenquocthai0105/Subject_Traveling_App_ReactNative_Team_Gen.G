@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
   Image,
@@ -32,6 +33,18 @@ const LoginScreen = () => {
   const selectedCountry = countryCodes.find(
     (country) => country.value == countryCode
   );
+
+  const [phone, setPhone] = useState("");
+
+  const navigation = useNavigation();
+  const validateInput = () => {
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Invalid phone number");
+    } else {
+      navigation.navigate("HomeScreen");
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -85,10 +98,15 @@ const LoginScreen = () => {
                 : countryCodes[0].value + " Mobile number"
             }
             style={[styles.textInput, styles.text]}
+            value={phone}
+            onChangeText={(text) => setPhone(text)}
           />
         </View>
         <TouchableOpacity
           style={[styles.button, { backgroundColor: "#00bcd4" }]}
+          onPress={() => {
+            validateInput();
+          }}
         >
           <Text style={[styles.text, { color: "white" }]}>Continue</Text>
         </TouchableOpacity>
@@ -96,7 +114,7 @@ const LoginScreen = () => {
       <View style={{ alignItems: "center", marginTop: 20, marginBottom: 20 }}>
         <Text style={{ color: "grey" }}>or</Text>
       </View>
-      <View>
+      <View style={styles.Link}>
         <View>
           <AntDesign
             name="apple1"
@@ -148,6 +166,38 @@ const LoginScreen = () => {
             </Text>
           </TouchableOpacity>
         </View>
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: "grey" }}>By signing up, you agree to our</Text>
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              style={{ borderBottomWidth: 1, borderColor: "grey" }}
+            >
+              <Text style={{ marginRight: 3, color: "grey" }}>
+                Terms of Service
+              </Text>
+            </TouchableOpacity>
+            <Text style={{ marginRight: 3, color: "grey" }}>and</Text>
+            <TouchableOpacity
+              style={{ borderBottomWidth: 1, borderColor: "grey" }}
+            >
+              <Text style={{ color: "grey" }}>Privacy Policy</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+      <View style={styles.footer}>
+        <Text style={{ fontSize: 20, color: "grey", textAlign: "center" }}>
+          Already have an account?
+        </Text>
+        <TouchableOpacity>
+          <Text style={{ color: "#00bcd4", fontSize: 20 }}> Log in</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -161,6 +211,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
+    justifyContent: "center",
   },
   middle: {
     flex: 2,
@@ -185,6 +236,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
+  },
+  Link: {
+    flex: 3,
+    justifyContent: "space-around",
+  },
+  footer: {
+    flex: 3,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
 });
 
