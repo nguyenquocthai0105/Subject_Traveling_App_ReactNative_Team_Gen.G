@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "../screens/authentication/LoginScreen";
 import Index from "../screens/Index.js";
 import HomeScreen from "../screens/home/HomeScreen";
+import FavoriteScreen from "../screens/home/FavoriteScreen.js";
 const Navigation = () => {
   const Stack = createStackNavigator();
   return (
@@ -21,6 +22,11 @@ const Navigation = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="FavoriteScreen"
+          component={FavoriteScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

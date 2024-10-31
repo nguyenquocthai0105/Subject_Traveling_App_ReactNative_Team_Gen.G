@@ -11,9 +11,12 @@ import Feather from "react-native-vector-icons/Feather";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
+import { useNavigation } from "@react-navigation/native";
+import Footer from "./includes/Footer";
 
 const HomeScreen = () => {
-  const beach = [
+  const navigation = useNavigation();
+  const [beach, setBeach] = useState([
     {
       id: 1,
       type: "Beach",
@@ -21,6 +24,9 @@ const HomeScreen = () => {
       evaluated: 4.5,
       price: 200,
       image: "https://picsum.photos/200/300?random=1",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 2,
@@ -29,6 +35,9 @@ const HomeScreen = () => {
       evaluated: 4.7,
       price: 150,
       image: "https://picsum.photos/200/300?random=2",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 3,
@@ -37,6 +46,9 @@ const HomeScreen = () => {
       evaluated: 4.8,
       price: 250,
       image: "https://picsum.photos/200/300?random=3",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 4,
@@ -45,6 +57,9 @@ const HomeScreen = () => {
       evaluated: 4.6,
       price: 180,
       image: "https://picsum.photos/200/300?random=4",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 5,
@@ -53,10 +68,13 @@ const HomeScreen = () => {
       evaluated: 4.9,
       price: 300,
       image: "https://picsum.photos/200/300?random=5",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
-  ];
+  ]);
 
-  const mountain = [
+  const [mountain, setMountain] = useState([
     {
       id: 6,
       type: "Mountain",
@@ -64,6 +82,9 @@ const HomeScreen = () => {
       evaluated: 4.6,
       price: 220,
       image: "https://picsum.photos/200/300?random=6",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 7,
@@ -72,6 +93,9 @@ const HomeScreen = () => {
       evaluated: 4.8,
       price: 280,
       image: "https://picsum.photos/200/300?random=7",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 8,
@@ -80,6 +104,9 @@ const HomeScreen = () => {
       evaluated: 4.7,
       price: 250,
       image: "https://picsum.photos/200/300?random=8",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 9,
@@ -88,6 +115,9 @@ const HomeScreen = () => {
       evaluated: 4.9,
       price: 300,
       image: "https://picsum.photos/200/300?random=9",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 10,
@@ -96,10 +126,13 @@ const HomeScreen = () => {
       evaluated: 4.5,
       price: 190,
       image: "https://picsum.photos/200/300?random=10",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
-  ];
+  ]);
 
-  const camping = [
+  const [camping, setCamping] = useState([
     {
       id: 11,
       type: "Camping",
@@ -107,6 +140,9 @@ const HomeScreen = () => {
       evaluated: 4.6,
       price: 220,
       image: "https://picsum.photos/200/300?random=11",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 12,
@@ -115,6 +151,9 @@ const HomeScreen = () => {
       evaluated: 4.8,
       price: 280,
       image: "https://picsum.photos/200/300?random=12",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 13,
@@ -123,6 +162,9 @@ const HomeScreen = () => {
       evaluated: 4.7,
       price: 250,
       image: "https://picsum.photos/200/300?random=13",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 14,
@@ -131,6 +173,9 @@ const HomeScreen = () => {
       evaluated: 4.9,
       price: 300,
       image: "https://picsum.photos/200/300?random=14",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
     {
       id: 15,
@@ -139,8 +184,11 @@ const HomeScreen = () => {
       evaluated: 4.5,
       price: 190,
       image: "https://picsum.photos/200/300?random=15",
+      icon: "hearto",
+      icon1: "heart",
+      isSelected: false,
     },
-  ];
+  ]);
 
   const [buttonState, setButtonState] = useState("Beach");
   const buttonName = [
@@ -149,13 +197,7 @@ const HomeScreen = () => {
     { name: "Camping", icon: "campground" },
   ];
   const [buttonFooterState, setButtonFooterState] = useState("Search");
-  const buttonFooter = [
-    { name: "Search", icon: "search1" },
-    { name: "Favorites", icon: "hearto" },
-    { name: "Bookings", icon: "appstore-o" },
-    { name: "Inbox", icon: "message1" },
-    { name: "Profile", icon: "user" },
-  ];
+
   const renderButton = ({ item }) => {
     const isSelected = item.name === buttonState;
     return (
@@ -189,77 +231,93 @@ const HomeScreen = () => {
       </View>
     );
   };
-  const renderButtonFooter = ({ item }) => {
-    const isSelected = item.name === buttonFooterState;
+
+  const renderItem = ({ item }) => {
     return (
-      <View>
+      <View style={{ marginVertical: 20 }}>
         <TouchableOpacity
-          onPress={() => {
-            setButtonFooterState(item.name);
-          }}
           style={{
-            flex: 1,
-            flexDirection: "column",
-            alignItems: "center",
+            marginVertical: 20,
+            position: "absolute",
+            zIndex: 1,
+            right: 20,
+            backgroundColor: "white",
+            height: 40,
+            width: 40,
+            borderRadius: 30,
             justifyContent: "center",
+            alignItems: "center",
+          }}
+          onPress={() => {
+            toggleFavorite(item.id);
           }}
         >
           <AntDesign
-            name={item.icon}
+            name={item.isSelected ? item.icon1 : item.icon}
             size={20}
-            color={isSelected ? "#41cbda" : "grey"}
-            style={{ marginBottom: 5 }}
+            color={item.isSelected ? "red" : "grey"}
           />
-          <Text style={{ color: isSelected ? "#41cbda" : "grey" }}>
-            {item.name}
-          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image
+            source={{ uri: item.image }}
+            style={{ width: 350, height: 350, borderRadius: 10 }}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Entypo name="star" size={15} color="#ebd067" />
+              <Text>{item.evaluated}</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginTop: 5,
+            }}
+          >
+            <Text>{item.type}</Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ fontWeight: "bold" }}>${item.price}</Text>
+              <Text style={{ color: "grey" }}>/night</Text>
+            </View>
+          </View>
         </TouchableOpacity>
       </View>
     );
   };
-  const renderItem = ({ item }) => {
-    return (
-      <View style={{ marginVertical: 20 }}>
-        <Image
-          source={{ uri: item.image }}
-          style={{ width: 350, height: 350, borderRadius: 10 }}
-        />
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 20,
-          }}
-        >
-          <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Entypo name="star" size={15} color="#ebd067" />
-            <Text>{item.evaluated}</Text>
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 5,
-          }}
-        >
-          <Text>{item.type}</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={{ fontWeight: "bold" }}>${item.price}</Text>
-            <Text style={{ color: "grey" }}>/night</Text>
-          </View>
-        </View>
-      </View>
-    );
+  const toggleFavorite = (id) => {
+    if (buttonState === "Beach") {
+      const newBeach = beach.map((item) =>
+        item.id === id ? { ...item, isSelected: !item.isSelected } : item
+      );
+      setBeach(newBeach);
+    } else if (buttonState === "Mountain") {
+      const newMountain = mountain.map((item) =>
+        item.id === id ? { ...item, isSelected: !item.isSelected } : item
+      );
+      setMountain(newMountain);
+    } else {
+      const newCamping = camping.map((item) =>
+        item.id === id ? { ...item, isSelected: !item.isSelected } : item
+      );
+      setCamping(newCamping);
+    }
   };
   return (
     <View style={styles.container}>
@@ -306,24 +364,10 @@ const HomeScreen = () => {
           contentContainerStyle={{ alignItems: "center" }}
         />
       </View>
-      <View style={styles.footer}>
-        <FlatList
-          data={buttonFooter}
-          renderItem={renderButtonFooter}
-          keyExtractor={(item) => item.name}
-          contentContainerStyle={[
-            styles.buttonContainer,
-            {
-              position: "absolute",
-              bottom: 0,
-              paddingVertical: 20,
-              borderTopWidth: 1,
-              borderTopColor: "grey",
-              width: "100%",
-            },
-          ]}
-        />
-      </View>
+      <Footer
+        buttonFooterState={buttonFooterState}
+        setButtonFooterState={setButtonFooterState}
+      />
     </View>
   );
 };
@@ -342,11 +386,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
-  footer: {
-    flex: 1,
-  },
+
   body: {
     flex: 7,
+    backgroundColor: "white",
   },
 });
 export default HomeScreen;
