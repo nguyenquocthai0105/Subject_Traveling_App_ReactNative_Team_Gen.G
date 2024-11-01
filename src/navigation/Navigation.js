@@ -4,6 +4,7 @@ import LoginScreen from "../screens/authentication/LoginScreen";
 import Index from "../screens/Index.js";
 import HomeScreen from "../screens/home/HomeScreen";
 import FavoriteScreen from "../screens/home/FavoriteScreen.js";
+import SearchScreen from "../screens/home/SearchScreen.js";
 const Navigation = () => {
   const Stack = createStackNavigator();
   return (
@@ -27,6 +28,11 @@ const Navigation = () => {
         <Stack.Screen
           name="FavoriteScreen"
           component={FavoriteScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SearchScreen"
+          component={SearchScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

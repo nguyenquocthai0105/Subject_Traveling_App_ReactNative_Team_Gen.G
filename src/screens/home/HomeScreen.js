@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, Image } from "react-native";
 import {
   StyleSheet,
@@ -15,6 +15,10 @@ import { useNavigation } from "@react-navigation/native";
 import Footer from "./includes/Footer";
 
 const HomeScreen = () => {
+  useEffect(() => {
+    setButtonFooterState("Search");
+  }, []);
+
   const navigation = useNavigation();
   const [beach, setBeach] = useState([
     {
@@ -197,6 +201,7 @@ const HomeScreen = () => {
     { name: "Camping", icon: "campground" },
   ];
   const [buttonFooterState, setButtonFooterState] = useState("Search");
+  const [favoriteList, setFavoriteList] = useState([]);
 
   const renderButton = ({ item }) => {
     const isSelected = item.name === buttonState;
@@ -318,6 +323,13 @@ const HomeScreen = () => {
       );
       setCamping(newCamping);
     }
+
+    const item = [...beach, ...mountain, ...camping].find(
+      (item) => item.id === id
+    );
+    setFavoriteList((prev) =>
+      item.isSelected ? prev.filter((item) => item.id !== id) : [...prev, item]
+    );
   };
   return (
     <View style={styles.container}>
@@ -339,6 +351,7 @@ const HomeScreen = () => {
               borderColor: "grey",
               paddingLeft: 40,
             }}
+            onPress={() => navigation.navigate("SearchScreen")}
           />
         </View>
         <View style={{ marginTop: 20 }}>
@@ -367,6 +380,8 @@ const HomeScreen = () => {
       <Footer
         buttonFooterState={buttonFooterState}
         setButtonFooterState={setButtonFooterState}
+        favoriteList={favoriteList}
+        setFavoriteList={setFavoriteList}
       />
     </View>
   );
