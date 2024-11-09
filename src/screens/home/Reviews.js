@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Rating } from 'react-native-ratings';
 
-const MyScreen = () => {
+const Reviews = () => {
 
   const reviews = [
     {
@@ -235,4 +235,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyScreen;
+export default Reviews;

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'rea
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Rating } from 'react-native-ratings';
 
-const MyScreen = () => {
+const ConfirmAndPay = () => {
   const [transactionData, setTransactionData] = useState({
     price: '$20',
     rating: '5.0',
@@ -298,4 +298,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyScreen;
+export default ConfirmAndPay;
